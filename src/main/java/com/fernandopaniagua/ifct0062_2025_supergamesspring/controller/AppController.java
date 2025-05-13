@@ -4,7 +4,6 @@ import com.fernandopaniagua.ifct0062_2025_supergamesspring.model.Genre;
 import com.fernandopaniagua.ifct0062_2025_supergamesspring.model.Videogame;
 import com.fernandopaniagua.ifct0062_2025_supergamesspring.service.GenreService;
 import com.fernandopaniagua.ifct0062_2025_supergamesspring.service.VideogameService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -45,12 +44,25 @@ public class AppController {
         return mav;
     }
 
+
     @GetMapping("/create-videogame")
     public String initCreateVideogame(Model model){
         List<Genre> genreList = this.genreService.getAllGenres();
         model.addAttribute("genres",genreList);
         return "create_videogame";
     }
+
+//    @GetMapping("/search-videogame")
+//    public String searchVideogame(@RequestParam String title, Model model) {
+//        List<Videogame> videogameList = this.videogameService.searchByTitle(title);
+//        List<String> platforms = this.videogameService.findAllPlatformNames();
+//
+//        model.addAttribute("videogames", videogameList);
+//        model.addAttribute("platforms", platforms);
+//        model.addAttribute("searchTerm", title);
+//
+//        return "buscar_videogame";  // Match exactly with the template name
+//    }
 
     @PostMapping("/videogames")
     public String createVideogame(@ModelAttribute Videogame newVideogame) {

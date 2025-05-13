@@ -12,6 +12,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 @SpringBootTest
 public class VideogameServiceTest {
     @Autowired
@@ -23,7 +25,20 @@ public class VideogameServiceTest {
     @Autowired
     IVideogameRepository videogameRepository;
 
+
+    public void getPlatformNames() {
+       List<String> platformNames = (videogameService.findAllPlatformNames());
+       platformNames.forEach(System.out::println);
+       assert true;
+    }
+
     @Test
+    public void getGamesByPlatform() {
+        List<Videogame> videogames = videogameService.findVideogameByPlatform("Xbox");
+        videogames.forEach(System.err::println);
+        assert true;
+    }
+
     public void createVideogame() {
         Genre genero = new Genre("Genero borrar", "Descripción borrar");
         genero = this.genreRepository.save(genero);

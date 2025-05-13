@@ -24,7 +24,15 @@ public class VideogameService {
         return videogameRepository.findById(id).orElse(null);
     }
 
+    public List<Videogame> findVideogameByPlatform(String platform) {
+        return videogameRepository.findByPlatform(platform);
+    }
+
     public void deleteVideogame(Integer videogame) {
         videogameRepository.deleteById(videogame);
+    }
+
+    public List<String> findAllPlatformNames() {
+        return videogameRepository.getPlatformNames();
     }
 }

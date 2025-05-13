@@ -15,36 +15,46 @@
 <main>
     <h1>Lista de Videojuegos</h1>
     <table>
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Título</th>
-            <th>Plataforma</th>
-            <th>Multijugador</th>
-            <th>Precio (€)</th>
-            <th>Género</th>
-        </tr>
-        </thead>
-        <tbody>
-        <!-- Ejemplo de registros -->
-        <tr th:each="videogame : ${videogames}">
-            <td th:text="${videogame.id}"></td>
-            <td th:text="${videogame.title}"></td>
-            <td th:text="${videogame.platform}"></td>
-            <td th:text="${videogame.multiplayer}"></td>
-            <td th:text="${videogame.price}"></td>
-            <td th:text="${videogame.genre.name}"></td>
-            <td>
-                <a th:href="@{delete-videogame(id=${videogame.id})}">
-                    <img src="/images/eliminar.png" width="50px" alt="Delete">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Título</th>
+        <th>Plataforma</th>
+        <th>Multijugador</th>
+        <th>Precio (€)</th>
+        <th>Género</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="videogame : ${videogames}">
+        <td th:text="${videogame.id}"></td>
+        <td th:text="${videogame.title}"></td>
+        <td th:text="${videogame.platform}"></td>
+        <td><span th:text="${videogame.multiplayer ? 'Sí' : 'No'}"
+                  th:class="${videogame.multiplayer ? 'badge-success' : 'badge-secondary'}">
+            </span>
+        </td>
+        <td class="price-column">
+            <span th:text="${#numbers.formatDecimal(videogame.price, 1, 2)} + ' €'"></span>
+        </td>
+        <td th:text="${videogame.genre.name}"></td>
+        <td class="actions-column">
+            <div class="action-buttons">
+                <a th:href="@{edit-videogame(id=${videogame.id})}" class="action-button edit" title="Editar videojuego">
+                    <img src="/images/editar.png" width="24" alt="Editar">
                 </a>
-                <a th:href="@{edit-videogame(id=${videogame.id})}">
-                    <img src="/images/editar.png" width="50px" alt="Edit">
+                <a th:href="@{delete-videogame(id=${videogame.id})}" 
+                   class="action-button delete" 
+                   onclick="return confirm('¿Estás seguro de que deseas eliminar este juego?')"
+                   title="Eliminar videojuego">
+                    <img src="/images/eliminar.png" width="24" alt="Eliminar">
                 </a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
 </main>
 </body>
 </html>
