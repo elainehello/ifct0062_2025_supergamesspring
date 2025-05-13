@@ -20,6 +20,10 @@ public class VideogameService {
         return videogameRepository.save(videogame);
     }
 
+        public Videogame findVideogameById(Integer id) {
+        return videogameRepository.findById(id).orElse(null);
+    }
+
     public void deleteVideogame(Integer videogame) {
         videogameRepository.deleteById(videogame);
     }

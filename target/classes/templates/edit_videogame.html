@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Videojuego</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+    <span th:replace="navbar-fragment :: nav-bar"></span>
+</header>
+
+<main>
+    <h1>Editar Videojuego</h1>
+    <form th:action="@{/update-videogame}" method="post" th:object="${videogame}">
+        <!-- Hidden ID field -->
+        <input type="hidden" th:field="*{id}">
+
+        <div class="form-group">
+            <label for="title">Título:</label>
+            <input type="text" id="title" th:field="*{title}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="platform">Plataforma:</label>
+            <input type="text" id="platform" th:field="*{platform}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="multiplayer">Multijugador:</label>
+            <select id="multiplayer" th:field="*{multiplayer}">
+                <option value="true">Sí</option>
+                <option value="false">No</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Precio (€):</label>
+            <input type="number" id="price" th:field="*{price}" min="0" step="1" required>
+        </div>
+
+        <div class="form-group">
+            <label for="genre">Género:</label>
+            <select id="genre" th:field="*{genre.id}">
+                <option th:each="genreOption : ${genres}"
+                        th:value="${genreOption.id}"
+                        th:text="${genreOption.name}">
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group button-group">
+            <button type="submit" class="btn-primary">Guardar Cambios</button>
+            <a th:href="@{/}" class="btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</main>
+</body>
+</html>

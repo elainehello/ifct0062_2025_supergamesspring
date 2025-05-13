@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -30,7 +31,18 @@ public class AppController {
     @GetMapping("/delete-videogame")
     public String deleteVideogame(@RequestParam Integer id){
         System.err.println("Borrando videogame con id: " + id);
+        this.videogameService.deleteVideogame(id);
         return "redirect:/";
+    }
+
+    @GetMapping("/edit-videogame")
+    public ModelAndView editVideogame(@RequestParam Integer id) {
+        ModelAndView mav = new ModelAndView("edit_videogame");
+        List<Genre> genreList = this.genreService.getAllGenres();
+        Videogame videogame = this.videogameService.findVideogameById(id);
+        mav.addObject("genres", genreList);
+        mav.addObject("videogame", videogame);
+        return mav;
     }
 
     @GetMapping("/create-videogame")

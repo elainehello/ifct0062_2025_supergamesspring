@@ -34,9 +34,14 @@
             <td th:text="${videogame.multiplayer}"></td>
             <td th:text="${videogame.price}"></td>
             <td th:text="${videogame.genre.name}"></td>
-                <td>
-
-                </td>
+            <td>
+                <a th:href="@{delete-videogame(id=${videogame.id})}">
+                    <img src="/images/eliminar.png" width="50px" alt="Delete">
+                </a>
+                <a th:href="@{edit-videogame(id=${videogame.id})}">
+                    <img src="/images/editar.png" width="50px" alt="Edit">
+                </a>
+            </td>
         </tr>
         </tbody>
     </table>
