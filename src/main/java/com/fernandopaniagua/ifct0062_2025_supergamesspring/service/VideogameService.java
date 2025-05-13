@@ -19,4 +19,8 @@ public class VideogameService {
     public Videogame createVideogame(Videogame videogame) {
         return videogameRepository.save(videogame);
     }
+
+    public void deleteVideogame(Integer videogame) {
+        videogameRepository.deleteById(videogame);
+    }
 }

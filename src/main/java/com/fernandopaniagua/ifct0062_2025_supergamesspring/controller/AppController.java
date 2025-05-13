@@ -27,6 +27,12 @@ public class AppController {
         return "index";
     }
 
+    @GetMapping("/delete-videogame")
+    public String deleteVideogame(@RequestParam Integer id){
+        System.err.println("Borrando videogame con id: " + id);
+        return "redirect:/";
+    }
+
     @GetMapping("/create-videogame")
     public String initCreateVideogame(Model model){
         List<Genre> genreList = this.genreService.getAllGenres();
