@@ -20,7 +20,7 @@ public class VideogameService {
         return videogameRepository.save(videogame);
     }
 
-        public Videogame findVideogameById(Integer id) {
+    public Videogame findVideogameById(Integer id) {
         return videogameRepository.findById(id).orElse(null);
     }
 

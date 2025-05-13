@@ -11,6 +11,11 @@ import java.util.List;
 public class GenreService {
     @Autowired
     IGenreRepository genreRepository;
+
+    public Genre findById(Integer id) {
+        return genreRepository.findById(id).orElse(null);
+    }
+
     public List<Genre> getAllGenres() {
         return genreRepository.findAll();
     }

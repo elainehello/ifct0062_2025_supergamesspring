@@ -57,4 +57,31 @@ public class AppController {
         this.videogameService.createVideogame(newVideogame);
         return "redirect:/";
     }
+
+    // Update an existing videogame
+    @PostMapping("/update-videogame")
+    public String updateVideogame(@RequestParam("id") Integer id,
+                                  @RequestParam("title") String title,
+                                  @RequestParam("platform") String platform,
+                                  @RequestParam("multiplayer") boolean multiplayer,
+                                  @RequestParam("price") int price,
+                                  @RequestParam("genre.id") Integer genreId) {
+
+        // Get the existing videogame
+        Videogame videogame = videogameService.findVideogameById(id);
+        Genre genre = genreService.findById(genreId);
+
+        // Update the fields
+        videogame.setTitle(title);
+        videogame.setPlatform(platform);
+        videogame.setMultiplayer(multiplayer);
+        videogame.setPrice(price);
+        videogame.setGenre(genre);
+
+        // Use createVideogame which internally uses save()
+        videogameService.createVideogame(videogame);
+
+        return "redirect:/";
+    }
+
 }
