@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Videojuegos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+    <span th:replace="navbar-fragment :: nav-bar"></span>
+    <!-- navbar-frament es el nombre del template -->
+    <!-- nav-bar es el nombre del fragmento -->
+</header>
+
+<main>
+    <h1>Lista de Videojuegos</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Plataforma</th>
+            <th>Multijugador</th>
+            <th>Precio (€)</th>
+            <th>Género</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Ejemplo de registros -->
+        <tr th:each="videogame : ${videogames}">
+            <td th:text="${videogame.id}"></td>
+            <td th:text="${videogame.title}"></td>
+            <td th:text="${videogame.platform}"></td>
+            <td th:text="${videogame.multiplayer}"></td>
+            <td th:text="${videogame.price}"></td>
+            <td th:text="${videogame.genre.name}"></td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>
