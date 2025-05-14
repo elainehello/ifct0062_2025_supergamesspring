@@ -44,7 +44,6 @@ public class AppController {
         return mav;
     }
 
-
     @GetMapping("/create-videogame")
     public String initCreateVideogame(Model model){
         List<Genre> genreList = this.genreService.getAllGenres();
@@ -94,6 +93,13 @@ public class AppController {
         videogameService.createVideogame(videogame);
 
         return "redirect:/";
+    }
+
+    @GetMapping("/find-videogame")
+    public String searchVideogame(Model model){
+        List<String> platformNames = videogameService.getAllPlatforms();
+        model.addAttribute("platform_names", platformNames);
+        return "search-page";
     }
 
 }

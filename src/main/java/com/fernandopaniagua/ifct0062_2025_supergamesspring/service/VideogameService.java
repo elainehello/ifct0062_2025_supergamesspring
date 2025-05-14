@@ -28,6 +28,10 @@ public class VideogameService {
         return videogameRepository.findByPlatform(platform);
     }
 
+    public List<String> getAllPlatforms() {
+        return videogameRepository.getPlatformNames();
+    }
+
     public void deleteVideogame(Integer videogame) {
         videogameRepository.deleteById(videogame);
     }

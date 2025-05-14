@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Videojuego</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+    <span th:replace="navbar-fragment :: nav-bar"></span>
+</header>
+
+<main>
+    <h1>Editar Videojuego</h1>
+    <form action="/edit-videogame" method="post">
+        <div class="form-group">
+            <label for="title">Id:</label>
+            <input type="text" id="id" name="id" required th:value="${videogame.id}" readonly>
+        </div>
+        <div class="form-group">
+            <label for="title">Título:</label>
+            <input type="text" id="title" name="title" required th:value="${videogame.title}">
+        </div>
+        <div class="form-group">
+            <label for="platform">Plataforma:</label>
+            <input type="text" id="platform" name="platform" required th:value="${videogame.platform}">
+        </div>
+        <div class="form-group">
+            <label for="multiplayer">Multijugador:</label>
+            <select id="multiplayer" name="multiplayer">
+                <option value="true" th:selected="${videogame.multiplayer == true}">Sí</option>
+                <option value="false" th:selected="${videogame.multiplayer == false}">No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="price">Precio (€):</label>
+            <input type="number" id="price" name="price" min="0" step="1" required th:value="${videogame.price}">
+        </div>
+        <div class="form-group">
+            <label for="genre">Género:</label>
+            <select id="genre" name="genre">
+                <option th:each="genre : ${genres}" th:value="${genre.id}" th:text="${genre.name}" th:selected="${videogame.genre.id == genre.id}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <button type="submit">Modificar Videojuego</button>
+        </div>
+    </form>
+</main>
+</body>
+</html>

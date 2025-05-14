@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.fernandopaniagua.ifct0062_2025_supergamesspring.Ifct00622025SupergamesspringApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.615 s -- in com.fernandopaniagua.ifct0062_2025_supergamesspring.Ifct00622025SupergamesspringApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.627 s -- in com.fernandopaniagua.ifct0062_2025_supergamesspring.Ifct00622025SupergamesspringApplicationTests
