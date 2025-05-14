@@ -3,6 +3,7 @@ package com.fernandopaniagua.ifct0062_2025_supergamesspring.controller;
 import com.fernandopaniagua.ifct0062_2025_supergamesspring.model.Genre;
 import com.fernandopaniagua.ifct0062_2025_supergamesspring.model.Videogame;
 import com.fernandopaniagua.ifct0062_2025_supergamesspring.service.GenreService;
+import com.fernandopaniagua.ifct0062_2025_supergamesspring.service.IGenreService;
 import com.fernandopaniagua.ifct0062_2025_supergamesspring.service.VideogameService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +15,7 @@ import java.util.List;
 @Controller
 public class AppController {
     VideogameService videogameService;
-    GenreService genreService;
+    IGenreService genreService;
     public AppController(VideogameService videogameService, GenreService genreService) {
         this.videogameService = videogameService;
         this.genreService = genreService;
