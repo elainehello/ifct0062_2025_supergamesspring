@@ -21,12 +21,12 @@
     <!-- Search form with multiple criteria -->
     <form th:action="@{/search-videogame}" method="get" class="search-form">
         <div class="form-group">
-            <label for="title">Título:</label>
+            <label for="title">Plataforma:</label>
             <input type="text"
                    id="title"
                    name="title"
                    th:value="${param.title}"
-                   placeholder="Introduce el título del juego"
+                   placeholder="Introduce la plataforma del juego"
                    required>
         </div>
 
