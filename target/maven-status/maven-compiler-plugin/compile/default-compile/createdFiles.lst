@@ -1,6 +1,6 @@
+com/fernandopaniagua/ifct0062_2025_supergamesspring/model/Genre.class
 com/fernandopaniagua/ifct0062_2025_supergamesspring/model/Videogame.class
 com/fernandopaniagua/ifct0062_2025_supergamesspring/model/StudioPK.class
-com/fernandopaniagua/ifct0062_2025_supergamesspring/model/Genre.class
 com/fernandopaniagua/ifct0062_2025_supergamesspring/repository/IVideogameRepository.class
 com/fernandopaniagua/ifct0062_2025_supergamesspring/service/VideogameService.class
 com/fernandopaniagua/ifct0062_2025_supergamesspring/Ifct00622025SupergamesspringApplication.class
