@@ -51,17 +51,17 @@ public class AppController {
         return "create_videogame";
     }
 
-//    @GetMapping("/search-videogame")
-//    public String searchVideogame(@RequestParam String title, Model model) {
-//        List<Videogame> videogameList = this.videogameService.searchByTitle(title);
-//        List<String> platforms = this.videogameService.findAllPlatformNames();
-//
-//        model.addAttribute("videogames", videogameList);
-//        model.addAttribute("platforms", platforms);
-//        model.addAttribute("searchTerm", title);
-//
-//        return "buscar_videogame";  // Match exactly with the template name
-//    }
+    @GetMapping("/search-videogame")
+    public String searchVideogame(@RequestParam String title, Model model) {
+        List<Videogame> videogameList = this.videogameService.findVideogameByPlatform(title);
+        List<String> platforms = this.videogameService.findAllPlatformNames();
+
+        model.addAttribute("videogames", videogameList);
+        model.addAttribute("platforms", platforms);
+        model.addAttribute("searchTerm", title);
+
+        return "buscar_videogame";  // Match exactly with the template name
+    }
 
     @PostMapping("/videogames")
     public String createVideogame(@ModelAttribute Videogame newVideogame) {
