@@ -99,7 +99,9 @@ public class AppController {
     @GetMapping("/find-videogame")
     public String searchVideogame(Model model){
         List<String> platformNames = videogameService.getAllPlatforms();
+        List<Videogame> videogameList = videogameService.getAllVideogames();
         model.addAttribute("platform_names", platformNames);
+        model.addAttribute("videogames", videogameList);
         return "search-page";
     }
 
