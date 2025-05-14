@@ -2,50 +2,105 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Crear Videojuego</title>
+    <title>Buscar Videojuegos</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <header>
-    <span th:replace="navbar-fragment :: nav-bar"></span>
+    <span th:replace="~{navbar-fragment :: nav-bar}"></span>
 </header>
 
 <main>
-    <h1>Editar Videojuego</h1>
-    <form action="/edit-videogame" method="post">
-        <div class="form-group">
-            <label for="title">Id:</label>
-            <input type="text" id="id" name="id" required th:value="${videogame.id}" readonly>
-        </div>
+    <h1>Buscar Videojuegos</h1>
+
+    <!-- Error message display -->
+    <div th:if="${error}" class="error-message">
+        <p th:text="${error}"></p>
+    </div>
+
+    <!-- Search form with multiple criteria -->
+    <form th:action="@{/search-videogame}" method="get" class="search-form">
         <div class="form-group">
             <label for="title">Título:</label>
-            <input type="text" id="title" name="title" required th:value="${videogame.title}">
+            <input type="text"
+                   id="title"
+                   name="title"
+                   th:value="${param.title}"
+                   placeholder="Introduce el título del juego"
+                   required>
         </div>
+
         <div class="form-group">
             <label for="platform">Plataforma:</label>
-            <input type="text" id="platform" name="platform" required th:value="${videogame.platform}">
-        </div>
-        <div class="form-group">
-            <label for="multiplayer">Multijugador:</label>
-            <select id="multiplayer" name="multiplayer">
-                <option value="true" th:selected="${videogame.multiplayer == true}">Sí</option>
-                <option value="false" th:selected="${videogame.multiplayer == false}">No</option>
+            <select id="platform" name="platform">
+                <option value="">Todas las plataformas</option>
+                <option th:each="platform : ${platforms}"
+                        th:value="${platform}"
+                        th:text="${platform}"
+                        th:selected="${param.platform == platform}">
+                </option>
             </select>
         </div>
-        <div class="form-group">
-            <label for="price">Precio (€):</label>
-            <input type="number" id="price" name="price" min="0" step="1" required th:value="${videogame.price}">
-        </div>
-        <div class="form-group">
-            <label for="genre">Género:</label>
-            <select id="genre" name="genre">
-                <option th:each="genre : ${genres}" th:value="${genre.id}" th:text="${genre.name}" th:selected="${videogame.genre.id == genre.id}"></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <button type="submit">Modificar Videojuego</button>
+
+        <div class="form-controls">
+            <button type="submit" class="btn-primary">Buscar</button>
+            <button type="reset" class="btn-secondary">Limpiar</button>
+            <a th:href="@{/}" class="btn-link">Volver</a>
         </div>
     </form>
+
+    <!-- Search results feedback -->
+    <div th:if="${searchTerm != null}" class="search-feedback">
+        <p>Resultados de búsqueda para: <span th:text="${searchTerm}"></span></p>
+        <p th:if="${videogames != null and videogames.empty}" class="no-results">
+            No se encontraron videojuegos que coincidan con tu búsqueda
+        </p>
+    </div>
+
+    <!-- Results table -->
+    <div th:if="${videogames != null and !videogames.empty}" class="results-container">
+        <h2>Resultados encontrados: <span th:text="${videogames.size()}"></span></h2>
+        <table class="results-table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Plataforma</th>
+                <th>Multijugador</th>
+                <th>Precio (€)</th>
+                <th>Género</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="videogame : ${videogames}">
+                <td th:text="${videogame.id}"></td>
+                <td th:text="${videogame.title}"></td>
+                <td th:text="${videogame.platform}"></td>
+                <td><span th:text="${videogame.multiplayer ? 'Sí' : 'No'}"
+                          th:class="${videogame.multiplayer ? 'badge-success' : 'badge-secondary'}">
+                    </span>
+                </td>
+                <td class="price-column">
+                    <span th:text="${#numbers.formatDecimal(videogame.price, 1, 2)} + ' €'"></span>
+                </td>
+                <td th:text="${videogame.genre.name}"></td>
+                <td class="actions-column">
+                    <div class="action-buttons">
+                        <a th:href="@{edit-videogame(id=${videogame.id})}" class="action-button edit">
+                            <img src="/images/editar.png" width="24" alt="Editar">
+                        </a>
+                        <a th:href="@{delete-videogame(id=${videogame.id})}"
+                           class="action-button delete"
+                           onclick="return confirm('¿Estás seguro de que deseas eliminar este juego?')">
+                            <img src="/images/eliminar.png" width="24" alt="Eliminar">
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </main>
 </body>
 </html>
