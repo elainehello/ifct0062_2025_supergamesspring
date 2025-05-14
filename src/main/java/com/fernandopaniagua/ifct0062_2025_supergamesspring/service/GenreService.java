@@ -12,10 +12,12 @@ public class GenreService implements IGenreService {
     @Autowired
     IGenreRepository genreRepository;
 
+    @Override
     public Genre findById(Integer id) {
         return genreRepository.findById(id).orElse(null);
     }
 
+    @Override
     public List<Genre> getAllGenres() {
         return genreRepository.findAll();
     }
